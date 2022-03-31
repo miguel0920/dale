@@ -1,11 +1,6 @@
 ﻿using Dale.Domain;
 using Dale.Persistence.Database.Interfaces;
 using Dale.Services.Contract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dale.Services
 {
@@ -16,16 +11,42 @@ namespace Dale.Services
             _orderInfrastructure = orderInfrastructure;
         }
 
-        public Task<string> CreateOrder(CreateOrder order)
+        public async Task<string> CreateOrder(CreateOrder order)
         {
             try
             {
-                var result = _orderInfrastructure.InsertOrder(order);
+                var result = await _orderInfrastructure.InsertOrder(order);
                 return result;
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<List<Order>> GetOrders()
+        {
+            try
+            {
+                var result = await _orderInfrastructure.ListOrder();
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Order> GetOrderById(int id)
+        {
+            try
+            {
+                var result = await _orderInfrastructure.SelectOrderById(id);
+                return result;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

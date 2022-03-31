@@ -2,14 +2,14 @@ using Dale.WebSite.Apis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dale.WebSite.Pages.Product
+namespace Dale.WebSite.Pages.Customer
 {
     public class EditModel : PageModel
     {
-        public EditModel(IDaleClientProduct daleClient) => _daleClient = daleClient;
+        public EditModel(IDaleClientCustomer daleClient) => _daleClient = daleClient;
 
         [BindProperty]
-        public Models.ProductDto? ProductDTO { get; set; }
+        public Models.CustomerDto CustomerDTO { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -18,9 +18,9 @@ namespace Dale.WebSite.Pages.Product
                 return NotFound();
             }
 
-            ProductDTO = await _daleClient.GetProductById(id.Value);
+            CustomerDTO = await _daleClient.GetCustomerById(id.Value);
 
-            if (ProductDTO == null)
+            if (CustomerDTO == null)
             {
                 return NotFound();
             }
@@ -34,11 +34,11 @@ namespace Dale.WebSite.Pages.Product
                 return Page();
             }
 
-            await _daleClient.UpdateProduct(ProductDTO);
+            await _daleClient.UpdateCustomer(CustomerDTO);
 
             return RedirectToPage("./Index");
         }
 
-        private readonly IDaleClientProduct _daleClient;
+        private readonly IDaleClientCustomer _daleClient;
     }
 }

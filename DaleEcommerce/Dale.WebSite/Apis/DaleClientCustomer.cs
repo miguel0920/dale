@@ -7,11 +7,11 @@ namespace Dale.WebSite.Apis
 {
     public interface IDaleClientCustomer
     {
-        Task<string> CreateCustomer(Customer customer);
+        Task<string> CreateCustomer(CustomerDto customer);
         Task<string> DeleteCustomer(int id);
-        Task<List<Customer>?> GetCustomer();
-        Task<Customer?> GetCustomerById(int id);
-        Task<string> UpdateCustomer(Customer customer);
+        Task<List<CustomerDto>?> GetCustomer();
+        Task<CustomerDto?> GetCustomerById(int id);
+        Task<string> UpdateCustomer(CustomerDto customer);
     }
     public class DaleClientCustomer : IDaleClientCustomer
     {
@@ -21,12 +21,12 @@ namespace Dale.WebSite.Apis
             _apiUrls = apiUrls.Value;
         }
 
-        public async Task<Customer?> GetCustomerById(int id)
+        public async Task<CustomerDto?> GetCustomerById(int id)
         {
             var request = await _httpClient.GetAsync($"{_apiUrls.UrlDale}/api/customers/{id}");
             request.EnsureSuccessStatusCode();
 
-            return JsonSerializer.Deserialize<Customer>(
+            return JsonSerializer.Deserialize<CustomerDto>(
                 await request.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions
                 {
@@ -35,12 +35,12 @@ namespace Dale.WebSite.Apis
             );
         }
 
-        public async Task<List<Customer>?> GetCustomer()
+        public async Task<List<CustomerDto>?> GetCustomer()
         {
             var request = await _httpClient.GetAsync($"{_apiUrls.UrlDale}/api/customers");
             request.EnsureSuccessStatusCode();
 
-            return JsonSerializer.Deserialize<List<Customer>>(
+            return JsonSerializer.Deserialize<List<CustomerDto>>(
                 await request.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions
                 {
@@ -49,7 +49,7 @@ namespace Dale.WebSite.Apis
             );
         }
 
-        public async Task<string> CreateCustomer(Customer customer)
+        public async Task<string> CreateCustomer(CustomerDto customer)
         {
             var content = new StringContent(
                 JsonSerializer.Serialize(customer),
@@ -63,7 +63,7 @@ namespace Dale.WebSite.Apis
             return await request.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> UpdateCustomer(Customer customer)
+        public async Task<string> UpdateCustomer(CustomerDto customer)
         {
             var content = new StringContent(
                 JsonSerializer.Serialize(customer),

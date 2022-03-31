@@ -7,11 +7,11 @@ namespace Dale.WebSite.Apis
 {
     public interface IDaleClientProduct
     {
-        Task<string> CreateProduct(Product product);
+        Task<string> CreateProduct(ProductDto product);
         Task<string> DeleteProduct(int id);
-        Task<List<Product>?> GetProduct();
-        Task<Product?> GetProductById(int id);
-        Task<string> UpdateProduct(Product product);
+        Task<List<ProductDto>?> GetProduct();
+        Task<ProductDto?> GetProductById(int id);
+        Task<string> UpdateProduct(ProductDto product);
     }
     public class DaleClientProduct : IDaleClientProduct
     {
@@ -21,12 +21,12 @@ namespace Dale.WebSite.Apis
             _apiUrls = apiUrls.Value;
         }
 
-        public async Task<Product?> GetProductById(int id)
+        public async Task<ProductDto?> GetProductById(int id)
         {
             var request = await _httpClient.GetAsync($"{_apiUrls.UrlDale}/api/products/{id}");
             request.EnsureSuccessStatusCode();
 
-            return JsonSerializer.Deserialize<Product>(
+            return JsonSerializer.Deserialize<ProductDto>(
                 await request.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions
                 {
@@ -35,12 +35,12 @@ namespace Dale.WebSite.Apis
             );
         }
 
-        public async Task<List<Product>?> GetProduct()
+        public async Task<List<ProductDto>?> GetProduct()
         {
             var request = await _httpClient.GetAsync($"{_apiUrls.UrlDale}/api/products");
             request.EnsureSuccessStatusCode();
 
-            return JsonSerializer.Deserialize<List<Product>>(
+            return JsonSerializer.Deserialize<List<ProductDto>>(
                 await request.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions
                 {
@@ -49,7 +49,7 @@ namespace Dale.WebSite.Apis
             );
         }
 
-        public async Task<string> CreateProduct(Product product)
+        public async Task<string> CreateProduct(ProductDto product)
         {
             var content = new StringContent(
                 JsonSerializer.Serialize(product),
@@ -63,7 +63,7 @@ namespace Dale.WebSite.Apis
             return await request.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> UpdateProduct(Product product)
+        public async Task<string> UpdateProduct(ProductDto product)
         {
             var content = new StringContent(
                 JsonSerializer.Serialize(product),

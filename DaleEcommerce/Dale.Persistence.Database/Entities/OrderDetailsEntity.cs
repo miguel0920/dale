@@ -11,5 +11,6 @@ namespace Dale.Persistence.Database.Entities
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+        public decimal Value { get; set; }
     }
 }

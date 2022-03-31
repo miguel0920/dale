@@ -9,7 +9,7 @@ namespace Dale.Persistence.Database.Entities
         [Key]
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
-        public string Reference { get; set; }
+        public Guid Reference { get; set; }
         public decimal TotalValue { get; set; }
         public int TotalQuantity { get; set; }
     }

@@ -43,6 +43,7 @@ namespace Dale.Persistence.Database.Imple
                 customer.FirstName = customerDb.FirstName;
                 customer.LastName = customerDb.LastName;
                 customer.DocumentNumber = customerDb.DocumentNumber;
+                customer.CellPhone = customerDb.Phone;
             }
             return customer;
         }

@@ -1,0 +1,45 @@
+﻿@page
+@model Dale.WebSite.Pages.Order.IndexModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDTO[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDTO[0].Document)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDTO[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDTO[0].Reference)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDTO)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Document)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    <a asp-page="./Detail" asp-route-id="@item.Id">Detalle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

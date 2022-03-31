@@ -1,0 +1,67 @@
+﻿@page
+@model Dale.WebSite.Pages.Order.DetailModel
+@{
+}
+
+<div class="container border border-light">
+    <div class="form-group">
+        <label asp-for="OrderDTO.FullName" class="control-label"></label>
+        <input asp-for="OrderDTO.FullName" class="form-control" disabled="true" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDTO.Document" class="control-label"></label>
+        <input asp-for="OrderDTO.Document" class="form-control" disabled="true" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDTO.Phone" class="control-label"></label>
+        <input asp-for="OrderDTO.Phone" class="form-control" disabled="true" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDTO.Reference" class="control-label"></label>
+        <input asp-for="OrderDTO.Reference" class="form-control" disabled="true" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderDTO.TotalValue" class="control-label"></label>
+        <input asp-for="OrderDTO.TotalValue" class="form-control" disabled="true" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDTO.Total" class="control-label"></label>
+        <input asp-for="OrderDTO.Total" class="form-control" disabled="true" />
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDTO.Detail[0].ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDTO.Detail[0].Value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDTO.Detail[0].Quantity)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.OrderDTO.Detail)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.Value)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-page="Index">Volver a la lista</a>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 ﻿using Dale.Domain;
-using Dale.Services;
+using Dale.Services.Contract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaleEcommerce.Controllers
@@ -8,9 +8,21 @@ namespace DaleEcommerce.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        public OrderController(OrderService orderService)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Order>> Get()
+        {
+            return Ok(await _orderService.GetOrders());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Order>> GetById(int id)
+        {
+            return Ok(await _orderService.GetOrderById(id));
         }
 
         [HttpPost]
@@ -19,6 +31,6 @@ namespace DaleEcommerce.Controllers
             return Ok(await _orderService.CreateOrder(order));
         }
 
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService;
     }
 }

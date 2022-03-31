@@ -2,14 +2,14 @@ using Dale.WebSite.Apis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dale.WebSite.Pages.Product
+namespace Dale.WebSite.Pages.Customer
 {
     public class DeleteModel : PageModel
     {
-        public DeleteModel(IDaleClientProduct daleClient) => _daleClient = daleClient;
+        public DeleteModel(IDaleClientCustomer daleClient) => _daleClient = daleClient;
 
         [BindProperty]
-        public Models.ProductDto ProductDTO { get; set; }
+        public Models.CustomerDto CustomerDTO { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -18,9 +18,9 @@ namespace Dale.WebSite.Pages.Product
                 return NotFound();
             }
 
-            ProductDTO = await _daleClient.GetProductById(id.Value);
+            CustomerDTO = await _daleClient.GetCustomerById(id.Value);
 
-            if (ProductDTO == null)
+            if (CustomerDTO == null)
             {
                 return NotFound();
             }
@@ -36,17 +36,17 @@ namespace Dale.WebSite.Pages.Product
                     return NotFound();
                 }
 
-                var result = await _daleClient.DeleteProduct(id.Value);
+                var result = await _daleClient.DeleteCustomer(id.Value);
 
                 return RedirectToPage("./Index");
             }
-            catch
+            catch (Exception)
             {
-                ViewData["Message"] = "No fue posible eliminar el producto porque puede estar relacionado a una compra o no fue encontrado";
+                ViewData["Message"] = "No fue posible eliminar el cliente porque puede estar relacionado a una compra o no fue encontrado";
                 return null;
             }
         }
 
-        private readonly IDaleClientProduct _daleClient;
+        private readonly IDaleClientCustomer _daleClient;
     }
 }

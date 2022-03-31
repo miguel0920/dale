@@ -2,26 +2,26 @@ using Dale.WebSite.Apis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dale.WebSite.Pages.Product
+namespace Dale.WebSite.Pages.Customer
 {
     public class IndexModel : PageModel
     {
-        public IndexModel(IDaleClientProduct daleClient) => _daleClient = daleClient;
+        public IndexModel(IDaleClientCustomer daleClient) => _daleClient = daleClient;
 
         [BindProperty]
-        public List<Models.ProductDto>? ProductDTO { get; set; }
+        public List<Models.CustomerDto>? CustomerDTO { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            ProductDTO = await _daleClient.GetProduct();
+            CustomerDTO = await _daleClient.GetCustomer();
 
-            if (ProductDTO == null)
+            if (CustomerDTO == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        private readonly IDaleClientProduct _daleClient;
+        private readonly IDaleClientCustomer _daleClient;
     }
 }

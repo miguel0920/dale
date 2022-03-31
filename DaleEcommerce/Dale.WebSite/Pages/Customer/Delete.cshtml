@@ -1,5 +1,5 @@
 ﻿@page
-@model Dale.WebSite.Pages.Product.DeleteModel
+@model Dale.WebSite.Pages.Customer.DeleteModel
 @{
 }
 <h1>Eliminar</h1>
@@ -10,27 +10,33 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductDTO.Name)
+            @Html.DisplayNameFor(model => model.CustomerDTO.FirstName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductDTO.Name)
+            @Html.DisplayFor(model => model.CustomerDTO.FirstName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductDTO.Stock)
+            @Html.DisplayNameFor(model => model.CustomerDTO.LastName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductDTO.Stock)
+            @Html.DisplayFor(model => model.CustomerDTO.LastName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductDTO.Value)
+            @Html.DisplayNameFor(model => model.CustomerDTO.DocumentNumber)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductDTO.Value)
+            @Html.DisplayFor(model => model.CustomerDTO.DocumentNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerDTO.CellPhone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerDTO.CellPhone)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="ProductDTO.Id" />
+        <input type="hidden" asp-for="CustomerDTO.Id" />
         <input type="submit" value="Eliminar" class="btn btn-danger" /> |
         <a asp-page="./Index">Volver a la lista</a>
     </form>
@@ -43,4 +49,5 @@
             };
         </script>
     }
+
 </div>

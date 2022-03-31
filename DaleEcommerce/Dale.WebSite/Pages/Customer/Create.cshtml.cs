@@ -2,14 +2,14 @@ using Dale.WebSite.Apis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dale.WebSite.Pages.Product
+namespace Dale.WebSite.Pages.Customer
 {
     public class CreateModel : PageModel
     {
-        public CreateModel(IDaleClientProduct daleClient) => _daleClient = daleClient;
+        public CreateModel(IDaleClientCustomer daleClient) => _daleClient = daleClient;
 
         [BindProperty]
-        public Models.ProductDto ProductDTO { get; set; }
+        public Models.CustomerDto CustomerDTO { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -18,11 +18,11 @@ namespace Dale.WebSite.Pages.Product
                 return Page();
             }
 
-            await _daleClient.CreateProduct(ProductDTO);
+            await _daleClient.CreateCustomer(CustomerDTO);
 
             return RedirectToPage("./Index");
         }
 
-        private readonly IDaleClientProduct _daleClient;
+        private readonly IDaleClientCustomer _daleClient;
     }
 }

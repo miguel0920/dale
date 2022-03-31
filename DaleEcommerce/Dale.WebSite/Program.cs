@@ -7,6 +7,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddHttpClient<IDaleClientProduct, DaleClientProduct>();
 builder.Services.AddHttpClient<IDaleClientCustomer, DaleClientCustomer>();
+builder.Services.AddHttpClient<IDaleClientOrder, DaleClientOrder>();
 
 builder.Services.Configure<ApiUrls>(opts => builder.Configuration.GetSection("ApiUrls").Bind(opts));
 

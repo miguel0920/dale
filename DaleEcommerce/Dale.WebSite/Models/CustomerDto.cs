@@ -1,6 +1,6 @@
 ﻿namespace Dale.WebSite.Models
 {
-    public class Customer
+    public class CustomerDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
